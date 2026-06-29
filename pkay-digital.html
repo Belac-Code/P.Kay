@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>P.KAY Digital Enterprise Ltd — Nigeria's #1 EdTech & Admission Engine</title>
+<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  :root {
+    --obsidian: #090c10;
+    --deep: #0d1117;
+    --surface: #161b22;
+    --panel: #1c2330;
+    --border: #30363d;
+    --cyan: #00e5ff;
+    --cyan-dim: #00b8cc;
+    --cyan-glow: rgba(0,229,255,0.15);
+    --electric: #7df9ff;
+    --gold: #f0c040;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --white: #ffffff;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--obsidian);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;line-height:1.6;}
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:4px;}
+  ::-webkit-scrollbar-track{background:var(--deep);}
+  ::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:4px;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;transition:all 0.3s ease;border-bottom:1px solid transparent;}
+  nav.scrolled{background:rgba(9,12,16,0.92);backdrop-filter:blur(20px);border-bottom-color:var(--border);}
+  .nav-logo{display:flex;align-items:center;gap:0.5rem;text-decoration:none;}
+  .logo-mark{width:38px;height:38px;background:linear-gradient(135deg,var(--cyan),var(--electric));border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Syncopate',sans-serif;font-weight:700;font-size:0.85rem;color:var(--obsidian);}
+  .logo-text{font-family:'Syncopate',sans-serif;font-weight:700;font-size:1rem;color:var(--white);letter-spacing:0.05em;}
+  .logo-sub{font-size:0.55rem;color:var(--cyan);letter-spacing:0.15em;text-transform:uppercase;font-family:'Inter',sans-serif;}
+  .nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.875rem;font-weight:500;letter-spacing:0.02em;transition:color 0.2s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--cyan);transition:width 0.25s;}
+  .nav-links a:hover{color:var(--cyan);}
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{background:linear-gradient(90deg,var(--cyan),var(--electric));color:var(--obsidian);border:none;padding:0.55rem 1.4rem;border-radius:6px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.85rem;cursor:pointer;letter-spacing:0.04em;transition:transform 0.2s,box-shadow 0.2s;}
+  .nav-cta:hover{transform:translateY(-1px);box-shadow:0 0 20px rgba(0,229,255,0.35);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:0.25rem;}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--cyan);border-radius:2px;transition:all 0.3s;}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:6rem 2rem 4rem;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,0.04) 1px,transparent 1px);background-size:60px 60px;animation:gridPulse 8s ease-in-out infinite;}
+  @keyframes gridPulse{0%,100%{opacity:0.5;}50%{opacity:1;}}
+  .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbFloat 6s ease-in-out infinite;}
+  .orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,229,255,0.12),transparent 70%);top:-100px;right:-100px;animation-delay:0s;}
+  .orb2{width:350px;height:350px;background:radial-gradient(circle,rgba(125,249,255,0.08),transparent 70%);bottom:0;left:-50px;animation-delay:-3s;}
+  @keyframes orbFloat{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(-30px) scale(1.05);}}
+  .hero-content{position:relative;z-index:1;text-align:center;max-width:900px;}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:100px;padding:0.4rem 1rem;font-size:0.75rem;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;font-weight:600;margin-bottom:2rem;animation:fadeInDown 0.8s ease forwards;}
+  .hero-eyebrow span{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:blink 1.5s ease infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+  .hero-title{font-family:'Syncopate',sans-serif;font-size:clamp(2.2rem,6vw,4.5rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;margin-bottom:1.5rem;opacity:0;animation:fadeInUp 1s 0.2s ease forwards;}
+  .hero-title .line2{display:block;background:linear-gradient(90deg,var(--cyan),var(--electric),var(--cyan));background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite,fadeInUp 1s 0.4s ease forwards;opacity:0;}
+  @keyframes shimmer{0%{background-position:0% center;}100%{background-position:200% center;}}
+  .hero-desc{font-size:1.1rem;color:var(--muted);max-width:620px;margin:0 auto 2.5rem;line-height:1.75;opacity:0;animation:fadeInUp 1s 0.6s ease forwards;}
+  .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeInUp 1s 0.8s ease forwards;}
+  .btn-primary{background:linear-gradient(90deg,var(--cyan),var(--electric));color:var(--obsidian);border:none;padding:0.85rem 2rem;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;letter-spacing:0.03em;transition:all 0.25s;display:inline-flex;align-items:center;gap:0.5rem;}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,229,255,0.35);}
+  .btn-primary:active{transform:translateY(-1px);}
+  .btn-outline{background:transparent;color:var(--cyan);border:1px solid rgba(0,229,255,0.4);padding:0.85rem 2rem;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:0.95rem;cursor:pointer;letter-spacing:0.03em;transition:all 0.25s;display:inline-flex;align-items:center;gap:0.5rem;text-decoration:none;}
+  .btn-outline:hover{background:rgba(0,229,255,0.08);border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,229,255,0.15);}
+  .hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border);flex-wrap:wrap;opacity:0;animation:fadeInUp 1s 1s ease forwards;}
+  .stat-item{text-align:center;}
+  .stat-num{font-family:'Syncopate',sans-serif;font-size:2rem;font-weight:700;color:var(--cyan);display:block;}
+  .stat-label{font-size:0.75rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;}
+
+  @keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+  /* SECTIONS */
+  section{padding:6rem 2rem;}
+  .container{max-width:1100px;margin:0 auto;}
+  .section-eyebrow{font-size:0.72rem;color:var(--cyan);letter-spacing:0.18em;text-transform:uppercase;font-weight:700;margin-bottom:0.75rem;display:block;}
+  .section-title{font-family:'Syncopate',sans-serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:700;line-height:1.15;margin-bottom:1rem;}
+  .section-desc{color:var(--muted);font-size:1rem;line-height:1.8;max-width:600px;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .about-visual{position:relative;}
+  .about-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;}
+  .about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);}
+  .about-card-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);border-radius:100px;padding:0.3rem 0.75rem;font-size:0.7rem;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;}
+  .about-metric{display:flex;justify-content:space-between;align-items:center;padding:1rem 0;border-bottom:1px solid var(--border);}
+  .about-metric:last-child{border-bottom:none;}
+  .metric-label{font-size:0.875rem;color:var(--muted);}
+  .metric-val{font-family:'Syncopate',sans-serif;font-size:1.1rem;color:var(--cyan);font-weight:700;}
+  .floating-badge{position:absolute;bottom:-15px;right:-15px;background:linear-gradient(135deg,var(--cyan),var(--electric));color:var(--obsidian);border-radius:12px;padding:1rem 1.25rem;font-family:'Syncopate',sans-serif;font-weight:700;font-size:0.8rem;box-shadow:0 8px 30px rgba(0,229,255,0.3);animation:floatBadge 3s ease-in-out infinite;}
+  @keyframes floatBadge{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  .about-body p{color:var(--muted);line-height:1.85;margin-bottom:1.25rem;font-size:0.975rem;}
+  .about-body p strong{color:var(--text);}
+
+  /* SERVICES */
+  .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem;}
+  .service-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:2rem;position:relative;overflow:hidden;cursor:default;transition:all 0.35s cubic-bezier(0.23,1,0.32,1);}
+  .service-card::before{content:'';position:absolute;inset:0;background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(0,229,255,0.06),transparent 40%);opacity:0;transition:opacity 0.3s;}
+  .service-card:hover{border-color:rgba(0,229,255,0.35);transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+  .service-card:hover::before{opacity:1;}
+  .service-icon{width:52px;height:52px;background:linear-gradient(135deg,rgba(0,229,255,0.12),rgba(0,229,255,0.04));border:1px solid rgba(0,229,255,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--cyan);margin-bottom:1.25rem;}
+  .service-card h3{font-size:1.05rem;font-weight:700;margin-bottom:0.75rem;color:var(--white);}
+  .service-card p{font-size:0.88rem;color:var(--muted);line-height:1.75;}
+  .service-tag{display:inline-block;margin-top:1rem;font-size:0.7rem;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;border:1px solid rgba(0,229,255,0.2);border-radius:100px;padding:0.2rem 0.65rem;}
+
+  /* HOW IT WORKS */
+  .how-section{background:var(--deep);}
+  .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem;}
+  .how-card{text-align:center;padding:2rem 1.5rem;position:relative;}
+  .how-num{font-family:'Syncopate',sans-serif;font-size:3.5rem;font-weight:700;color:rgba(0,229,255,0.08);line-height:1;margin-bottom:1rem;}
+  .how-icon{width:60px;height:60px;margin:0 auto 1.25rem;background:linear-gradient(135deg,var(--cyan),var(--electric));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--obsidian);position:relative;top:-10px;}
+  .how-card h3{font-size:1rem;font-weight:700;margin-bottom:0.6rem;color:var(--white);}
+  .how-card p{font-size:0.875rem;color:var(--muted);line-height:1.7;}
+  .how-connector{position:absolute;top:80px;right:-1rem;width:2rem;height:1px;background:linear-gradient(90deg,var(--border),var(--cyan));display:none;}
+
+  /* ACHIEVEMENTS */
+  .achievements-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+  .achievements-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3rem;}
+  .achievement-card{text-align:center;padding:2rem;background:var(--panel);border:1px solid var(--border);border-radius:16px;transition:all 0.3s;position:relative;overflow:hidden;}
+  .achievement-card::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity 0.3s;}
+  .achievement-card:hover{transform:translateY(-5px);border-color:rgba(0,229,255,0.25);}
+  .achievement-card:hover::after{opacity:1;}
+  .ach-icon{font-size:2rem;margin-bottom:0.75rem;display:block;}
+  .ach-num{font-family:'Syncopate',sans-serif;font-size:2.2rem;font-weight:700;color:var(--cyan);display:block;}
+  .ach-label{font-size:0.8rem;color:var(--muted);letter-spacing:0.06em;margin-top:0.3rem;display:block;}
+
+  /* TESTIMONIALS */
+  .testimonials-section{background:var(--obsidian);}
+  .testimonials-track-wrap{overflow:hidden;margin-top:3rem;cursor:grab;user-select:none;}
+  .testimonials-track-wrap:active{cursor:grabbing;}
+  .testimonials-track{display:flex;gap:1.5rem;width:max-content;transition:transform 0.1s linear;}
+  .testi-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.75rem;width:320px;flex-shrink:0;position:relative;transition:all 0.3s;}
+  .testi-card:hover{border-color:rgba(0,229,255,0.25);transform:translateY(-4px);}
+  .testi-stars{color:var(--gold);font-size:0.85rem;letter-spacing:0.1em;margin-bottom:1rem;}
+  .testi-text{font-size:0.88rem;color:var(--muted);line-height:1.75;margin-bottom:1.25rem;font-style:italic;}
+  .testi-author{display:flex;align-items:center;gap:0.75rem;}
+  .testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--electric));display:flex;align-items:center;justify-content:center;font-family:'Syncopate',sans-serif;font-weight:700;font-size:0.75rem;color:var(--obsidian);flex-shrink:0;}
+  .testi-name{font-size:0.875rem;font-weight:700;color:var(--white);}
+  .testi-role{font-size:0.72rem;color:var(--cyan);letter-spacing:0.05em;}
+  .testi-quote-mark{position:absolute;top:1.25rem;right:1.25rem;font-size:3rem;color:rgba(0,229,255,0.08);font-family:Georgia,serif;line-height:1;}
+  .testi-controls{display:flex;justify-content:center;gap:1rem;margin-top:2rem;}
+  .testi-btn{background:var(--surface);border:1px solid var(--border);color:var(--cyan);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all 0.25s;}
+  .testi-btn:hover{background:rgba(0,229,255,0.1);border-color:var(--cyan);transform:scale(1.08);}
+
+  /* CONTACT / CTA */
+  .contact-section{background:var(--deep);}
+  .contact-inner{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:4rem;position:relative;overflow:hidden;}
+  .contact-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),var(--electric),transparent);}
+  .contact-glow{position:absolute;top:-60px;right:-60px;width:300px;height:300px;background:radial-gradient(circle,rgba(0,229,255,0.07),transparent 70%);pointer-events:none;}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+  .contact-channels{display:flex;flex-direction:column;gap:1rem;margin-top:2rem;}
+  .channel-card{display:flex;align-items:center;gap:1rem;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;text-decoration:none;transition:all 0.25s;}
+  .channel-card:hover{border-color:rgba(0,229,255,0.3);transform:translateX(6px);background:rgba(0,229,255,0.04);}
+  .channel-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+  .channel-icon.wa{background:rgba(37,211,102,0.12);color:#25d366;}
+  .channel-icon.ph{background:rgba(0,229,255,0.1);color:var(--cyan);}
+  .channel-icon.em{background:rgba(240,192,64,0.1);color:var(--gold);}
+  .channel-text strong{display:block;font-size:0.875rem;color:var(--white);}
+  .channel-text span{font-size:0.78rem;color:var(--muted);}
+  .contact-form{display:flex;flex-direction:column;gap:1rem;}
+  .form-group{display:flex;flex-direction:column;gap:0.4rem;}
+  .form-group label{font-size:0.78rem;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;font-weight:600;}
+  .form-group input,.form-group textarea,.form-group select{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:0.75rem 1rem;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:0.9rem;outline:none;transition:all 0.25s;resize:vertical;}
+  .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,0.08);}
+  .form-group select option{background:var(--panel);}
+  .form-group textarea{min-height:110px;}
+  .form-submit{background:linear-gradient(90deg,var(--cyan),var(--electric));color:var(--obsidian);border:none;padding:0.9rem 2rem;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.95rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.5rem;transition:all 0.25s;}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,229,255,0.3);}
+
+  /* FOOTER */
+  footer{background:var(--obsidian);border-top:1px solid var(--border);padding:3rem 2rem;}
+  .footer-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;}
+  .footer-brand p{font-size:0.85rem;color:var(--muted);line-height:1.75;margin-top:0.75rem;max-width:260px;}
+  .footer-col h4{font-size:0.78rem;color:var(--white);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;font-weight:700;}
+  .footer-col a{display:block;font-size:0.85rem;color:var(--muted);text-decoration:none;margin-bottom:0.5rem;transition:color 0.2s;}
+  .footer-col a:hover{color:var(--cyan);}
+  .footer-bottom{max-width:1100px;margin:2rem auto 0;padding-top:1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+  .footer-bottom p{font-size:0.78rem;color:var(--muted);}
+  .footer-socials{display:flex;gap:0.75rem;}
+  .social-btn{width:34px;height:34px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;cursor:pointer;transition:all 0.2s;text-decoration:none;}
+  .social-btn:hover{color:var(--cyan);border-color:rgba(0,229,255,0.3);background:rgba(0,229,255,0.05);}
+
+  /* REVEAL ON SCROLL */
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .reveal-left.visible{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .reveal-right.visible{opacity:1;transform:translateX(0);}
+
+  /* COUNTER */
+  .counter{display:inline-block;}
+
+  /* TOAST */
+  .toast{position:fixed;bottom:2rem;right:2rem;background:var(--surface);border:1px solid rgba(0,229,255,0.3);border-radius:12px;padding:1rem 1.5rem;display:flex;align-items:center;gap:0.75rem;box-shadow:0 8px 30px rgba(0,0,0,0.4);z-index:9999;transform:translateX(120%);transition:transform 0.4s cubic-bezier(0.23,1,0.32,1);}
+  .toast.show{transform:translateX(0);}
+  .toast-icon{color:var(--cyan);font-size:1.1rem;}
+  .toast-text{font-size:0.875rem;color:var(--text);}
+
+  /* MOBILE NAV */
+  .mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(9,12,16,0.97);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{color:var(--text);text-decoration:none;font-family:'Syncopate',sans-serif;font-size:1.4rem;font-weight:700;transition:color 0.2s;}
+  .mobile-menu a:hover{color:var(--cyan);}
+  .mobile-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--cyan);font-size:1.5rem;cursor:pointer;}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .about-grid,.contact-grid{grid-template-columns:1fr;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+    .nav-links,.nav-cta{display:none;}
+    .hamburger{display:flex;}
+    .floating-badge{bottom:-10px;right:-10px;}
+    .hero-stats{gap:1.5rem;}
+    .contact-inner{padding:2rem;}
+    .how-connector{display:none;}
+  }
+  @media(max-width:480px){
+    .footer-inner{grid-template-columns:1fr;}
+    .footer-bottom{flex-direction:column;text-align:center;}
+  }
+
+  /* WHATSAPP FLOAT */
+  .wa-float{position:fixed;bottom:2rem;left:2rem;z-index:900;background:#25d366;color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);text-decoration:none;animation:waPulse 2s ease-in-out infinite;}
+  @keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4);}50%{box-shadow:0 4px 35px rgba(37,211,102,0.7);}}
+
+  /* SECTION DIVIDER */
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:0;}
+</style>
+</head>
+<body>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/2349020730693" target="_blank" class="wa-float" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle toast-icon"></i>
+  <span class="toast-text" id="toast-text">Message sent successfully!</span>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()"><i class="fas fa-times"></i></button>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#achievements" onclick="closeMobile()">Achievements</a>
+  <a href="#testimonials" onclick="closeMobile()">Testimonials</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="logo-mark">PK</div>
+    <div>
+      <div class="logo-text">P.KAY</div>
+      <div class="logo-sub">Digital Enterprise Ltd</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="scrollToContact()">Get Started <i class="fas fa-arrow-right"></i></button>
+  <div class="hamburger" onclick="openMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="grid-overlay"></div>
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span></span> Nigeria's #1 EdTech & Admission Engine</div>
+    <h1 class="hero-title">
+      We Don't Just Register.<br>
+      <span class="line2">We Get You In.</span>
+    </h1>
+    <p class="hero-desc">
+      P.Kay Digital Enterprise Ltd is the strategic fusion of <strong>KB's JAMB Services</strong> and <strong>PrintKay's Tech</strong> — a vertically integrated powerhouse that has guided over 1,200 candidates to their dream universities with zero errors and maximum results.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="scrollToContact()">
+        <i class="fas fa-rocket"></i> Start Your Journey
+      </button>
+      <a href="#services" class="btn-outline">
+        <i class="fas fa-play-circle"></i> See What We Offer
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num"><span class="counter" data-target="1200">0</span>+</span>
+        <span class="stat-label">Candidates Processed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><span class="counter" data-target="15000">0</span>+</span>
+        <span class="stat-label">Mock Sessions Completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><span class="counter" data-target="88">0</span>%</span>
+        <span class="stat-label">Scored 250+ in UTME</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><span class="counter" data-target="0">0</span></span>
+        <span class="stat-label">Registration Errors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-left">
+        <span class="section-eyebrow">Who We Are</span>
+        <h2 class="section-title">Built for Nigeria's Most Ambitious Students</h2>
+        <div class="about-body">
+          <p>
+            <strong>P.Kay Digital Enterprise Ltd</strong> was born from a single conviction: that no talented Nigerian student should lose their university spot to registration errors, poor preparation, or lack of access to quality tools. We are headquartered in Port Harcourt, Rivers State, with nationwide digital reach.
+          </p>
+          <p>
+            Our operation is a seamless vertical integration of two industry-defining divisions. <strong>KB's JAMB Services</strong> is the student-facing powerhouse — the trusted name thousands of candidates and parents call first when JAMB season arrives. We handle JAMB registration, data corrections, institutional Post-UTME screening runs, and every complex portal logistics challenge that leaves candidates panicking.
+          </p>
+          <p>
+            <strong>PrintKay's Tech</strong> is our engineering backbone — the invisible engine that powers the most sophisticated CBT simulation platform in Nigeria. Built on high-performance frontend architecture with precision-designed algorithms, our platform mirrors the exact UI of JAMB and Post-UTME portals, eliminates exam anxiety, and trains candidates to perform at their absolute peak.
+          </p>
+          <p>
+            Together, these divisions create an unstoppable ecosystem that has produced a track record no competitor can match: <strong>1,200+ flawless registrations</strong>, <strong>15,000+ completed mock sessions</strong>, and an <strong>88% success rate</strong> of students scoring 250 and above. We are not a cyber café. We are a digital institution.
+          </p>
+          <button class="btn-primary" onclick="scrollToContact()" style="margin-top:0.5rem;">
+            <i class="fas fa-phone"></i> Contact the CEO
+          </button>
+        </div>
+      </div>
+      <div class="about-visual reveal-right">
+        <div class="about-card">
+          <div class="about-card-badge"><i class="fas fa-circle" style="font-size:0.5rem"></i> Live Operations</div>
+          <div class="about-metric">
+            <span class="metric-label">Division 01 — Student Services</span>
+            <span class="metric-val">KB's JAMB</span>
+          </div>
+          <div class="about-metric">
+            <span class="metric-label">Division 02 — Tech Platform</span>
+            <span class="metric-val">PrintKay's Tech</span>
+          </div>
+          <div class="about-metric">
+            <span class="metric-label">Physical Hub Location</span>
+            <span class="metric-val">Port Harcourt</span>
+          </div>
+          <div class="about-metric">
+            <span class="metric-label">Nationwide Reach</span>
+            <span class="metric-val">All 36 States</span>
+          </div>
+          <div class="about-metric">
+            <span class="metric-label">Error Rate on Registrations</span>
+            <span class="metric-val" style="color:var(--gold)">0.00%</span>
+          </div>
+          <div class="about-metric">
+            <span class="metric-label">Year Established</span>
+            <span class="metric-val">2025</span>
+          </div>
+        </div>
+        <div class="floating-badge">
+          <div style="font-size:0.6rem;letter-spacing:0.1em;margin-bottom:2px;">SUCCESS RATE</div>
+          <div style="font-size:1.6rem;">88%</div>
+          <div style="font-size:0.55rem;color:rgba(9,12,16,0.6);letter-spacing:0.05em;">UTME 250+ SCORERS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--deep);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+      <span class="section-eyebrow">What We Do</span>
+      <h2 class="section-title">A Complete Admission Arsenal</h2>
+      <p class="section-desc" style="margin:0 auto;">From the first click on the JAMB portal to the day you step onto your university campus, we are with you at every stage.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal" id="sc1">
+        <div class="service-icon"><i class="fas fa-id-card"></i></div>
+        <h3>JAMB Registration & Portal Management</h3>
+        <p>Zero-error JAMB registrations, NIN linkage, profile corrections, change of course or institution — executed with clinical precision. We have never missed a deadline or submitted an error.</p>
+        <span class="service-tag">KB's JAMB Services</span>
+      </div>
+      <div class="service-card reveal" id="sc2">
+        <div class="service-icon"><i class="fas fa-desktop"></i></div>
+        <h3>Proprietary CBT Practice Platform</h3>
+        <p>Our algorithmic engine serves 10,000+ questions across 19 subjects. Timed. Shuffled. University-specific. It replicates JAMB's exact interface so perfectly that students walk into the exam hall without a trace of anxiety.</p>
+        <span class="service-tag">PrintKay's Tech</span>
+      </div>
+      <div class="service-card reveal" id="sc3">
+        <div class="service-icon"><i class="fas fa-university"></i></div>
+        <h3>Post-UTME Screening Runs</h3>
+        <p>We coordinate and execute institutional Post-UTME screening registrations for all major Nigerian universities — UNILAG, UI, UNIPORT, RSU, OAU, FUTA, LASU, and dozens more. On time, every time.</p>
+        <span class="service-tag">KB's JAMB Services</span>
+      </div>
+      <div class="service-card reveal" id="sc4">
+        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Admission Counseling & Cut-Off Intel</h3>
+        <p>Real-time cut-off marks, departmental requirements, aggregate score calculations, and strategic course selection advice. We run the most active admissions intelligence channels on WhatsApp and Telegram in Nigeria.</p>
+        <span class="service-tag">Advisory Division</span>
+      </div>
+      <div class="service-card reveal" id="sc5">
+        <div class="service-icon"><i class="fas fa-code"></i></div>
+        <h3>Bespoke Web Architecture (SMEs)</h3>
+        <p>PrintKay's Tech designs and deploys high-performance, single-file web applications, dashboards, and digital tools for SMEs and institutions across Nigeria. Fintech, EdTech, portals — we build it beautifully.</p>
+        <span class="service-tag">PrintKay's Tech</span>
+      </div>
+      <div class="service-card reveal" id="sc6">
+        <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Performance Analytics & Score Tracking</h3>
+        <p>Every student on our CBT platform gets deep performance analytics — subject-by-subject breakdown, time management reports, and AI-powered weak-spot identification to maximize improvement before exam day.</p>
+        <span class="service-tag">PrintKay's Tech</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+      <span class="section-eyebrow">The Process</span>
+      <h2 class="section-title">From Application to Admission</h2>
+      <p class="section-desc" style="margin:0 auto;">Our integrated system handles everything. Here is exactly how the P.Kay engine works for you.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card reveal">
+        <div class="how-num">01</div>
+        <div class="how-icon"><i class="fas fa-user-plus"></i></div>
+        <h3>You Reach Out</h3>
+        <p>Contact us via WhatsApp, call, or this website. We assess your UTME score, O-level results, and course aspirations — free of charge.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">02</div>
+        <div class="how-icon"><i class="fas fa-file-alt"></i></div>
+        <h3>We Handle Registration</h3>
+        <p>KB's JAMB Services takes over all portal logistics — JAMB, CAPS, screening registration — with our zero-error guarantee.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">03</div>
+        <div class="how-icon"><i class="fas fa-laptop-code"></i></div>
+        <h3>You Train on Our Platform</h3>
+        <p>Access PrintKay's Tech CBT engine — full-length mock exams, timed per your target university, with deep analytics after every session.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">04</div>
+        <div class="how-icon"><i class="fas fa-trophy"></i></div>
+        <h3>You Score High. You Get In.</h3>
+        <p>Walk into your exam day ready. Our candidates score higher, gain admission faster, and join the 88% club that makes our track record.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" class="achievements-section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+      <span class="section-eyebrow">Track Record</span>
+      <h2 class="section-title">Numbers That Speak Louder</h2>
+      <p class="section-desc" style="margin:0 auto;">Since our launch in late 2025, every metric we track moves in one direction.</p>
+    </div>
+    <div class="achievements-grid">
+      <div class="achievement-card reveal">
+        <span class="ach-icon">🎯</span>
+        <span class="ach-num"><span class="counter" data-target="1200">0</span>+</span>
+        <span class="ach-label">Candidates Successfully Processed</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">⚡</span>
+        <span class="ach-num"><span class="counter" data-target="15000">0</span>+</span>
+        <span class="ach-label">CBT Mock Sessions Completed</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">🏆</span>
+        <span class="ach-num"><span class="counter" data-target="88">0</span>%</span>
+        <span class="ach-label">Students Who Scored 250+ UTME</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">🛡️</span>
+        <span class="ach-num">0</span>
+        <span class="ach-label">Registration Errors on Record</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">📚</span>
+        <span class="ach-num">10,000+</span>
+        <span class="ach-label">Questions in Our CBT Bank</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">🌍</span>
+        <span class="ach-num">36</span>
+        <span class="ach-label">States Reached Nationwide</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">🏫</span>
+        <span class="ach-num">50+</span>
+        <span class="ach-label">Universities Supported</span>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="ach-icon">💬</span>
+        <span class="ach-num">5,000+</span>
+        <span class="ach-label">Community Members on Our Channels</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto;">
+      <span class="section-eyebrow">Real Students. Real Results.</span>
+      <h2 class="section-title">What Our Candidates Say</h2>
+      <p class="section-desc" style="margin:0 auto;">Over 1,200 families trusted P.Kay with the most important exam of their child's life. Here is what they said.</p>
+    </div>
+    <div class="testimonials-track-wrap" id="testiWrap">
+      <div class="testimonials-track" id="testiTrack">
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I scored 298 in UTME! P.Kay's CBT platform is incredibly accurate — the questions felt identical to the real exam. I practiced for 3 weeks and walked in with zero fear. Best investment my parents ever made.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">CA</div>
+            <div><div class="testi-name">Chidinma A.</div><div class="testi-role">UNILAG Medicine Candidate · Lagos</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">KB's JAMB Services handled everything — my registration, my change of institution, my Post-UTME for UNIPORT. They never missed a single deadline. I got my admission while my classmates were still stressing.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">EO</div>
+            <div><div class="testi-name">Emeka O.</div><div class="testi-role">Engineering — UNIPORT · Rivers State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">My son scored 267 and gained admission to study Law at UI. The timing tracker on the CBT platform was a game-changer — he learned to manage his time perfectly. Absolutely worth every naira.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MK</div>
+            <div><div class="testi-name">Mrs. Kemi A.</div><div class="testi-role">Parent — Ibadan, Oyo State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I had failed UTME twice before P.Kay. They identified exactly where I was losing marks and put me on the right questions. Third attempt — 271. RSU Accounting. My family cried. I cried. Absolute legends.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">TB</div>
+            <div><div class="testi-name">Tochukwu B.</div><div class="testi-role">Accounting — RSU · Port Harcourt</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">The Telegram channel alone is worth it. They post cut-off mark updates before any other platform. When KWASU dropped their Medicine aggregate, P.Kay had it 2 hours before JAMB's official page updated.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">FA</div>
+            <div><div class="testi-name">Fatima A.</div><div class="testi-role">MBBS Candidate — KWASU · Kwara State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">PrintKay's Tech built a custom web dashboard for my school that transformed how we track students. Clean, fast, works perfectly on all devices. They treat client projects with the same seriousness as their own platform.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">DS</div>
+            <div><div class="testi-name">Mr. David S.</div><div class="testi-role">School Principal — PH, Rivers State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I registered with them at 10pm on the day before the deadline. Everything was sorted by midnight. They work around the clock during JAMB season. No other service in Port Harcourt does that.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">PN</div>
+            <div><div class="testi-name">Peace N.</div><div class="testi-role">Education — UNIABUJA · Abuja</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">My daughter scored 256 and got into OAU Pharmacy. The Post-UTME prep was unbelievably good. The questions they predicted actually came out. I am telling every parent I know about P.Kay.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RA</div>
+            <div><div class="testi-name">Alhaji R. A.</div><div class="testi-role">Parent — Ile-Ife, Osun State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I was skeptical about an online service handling my JAMB registration but they sent me real-time screenshots of every step. Total transparency. My slip was perfect. They have earned lifetime trust from me.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">HI</div>
+            <div><div class="testi-name">Hassan I.</div><div class="testi-role">Computer Science — BUK · Kano State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">The analytics dashboard showed me I was spending too long on Physics. They restructured my timing strategy. UTME result: Physics 48, Total 284. I literally jumped around my compound when the result dropped.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SO</div>
+            <div><div class="testi-name">Seun O.</div><div class="testi-role">Physics/Electronics — UNILAG · Lagos</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">They corrected my date of birth error on the JAMB portal in under 45 minutes. I had been rejected by three other cyber cafés who said it was impossible. P.Kay said nothing is impossible and proved it.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">GE</div>
+            <div><div class="testi-name">Grace E.</div><div class="testi-role">Nursing — UNIBEN · Edo State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Five of us from the same school used KB's JAMB Services this year. All five got admitted to our first-choice universities. Our school teacher thought we cheated — we just had the right team behind us.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">CB</div>
+            <div><div class="testi-name">Chiamaka B.</div><div class="testi-role">Biochemistry — UNIZIK · Anambra</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">The question bank is unreal. 10,000+ questions organized by year, by topic, by difficulty. I could drill exactly the areas I was weak in. I improved from a practice average of 189 to a real score of 261. Wow.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">KM</div>
+            <div><div class="testi-name">Kunle M.</div><div class="testi-role">Architecture — LASU · Lagos State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Customer care is top tier. They respond within minutes on WhatsApp, even at 11pm during screening season. I felt like I had a personal admission officer dedicated just to me. Worth every kobo.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">IR</div>
+            <div><div class="testi-name">Ifeoma R.</div><div class="testi-role">Law — UNIPORT · Rivers State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I relocated from Abuja to use their physical hub in Port Harcourt. It was worth the trip. The computers are fast, the staff know every corner of the JAMB system, and the environment motivates you to study.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">YA</div>
+            <div><div class="testi-name">Yusuf A.</div><div class="testi-role">Mass Comm — RSUST · Rivers State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">My twin sister and I both used the platform. She scored 278 and I scored 264. We are both now at FUNAAB. Our mum literally sent P.Kay a voice note crying happy tears. Incredible service.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">NN</div>
+            <div><div class="testi-name">Ngozi N.</div><div class="testi-role">Agriculture — FUNAAB · Ogun State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">The referral program is brilliant. I referred four friends and we all got a discount while all four passed their exams. The badge I got for scoring 270+ is still on my WhatsApp status one year later. Love this company.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">BO</div>
+            <div><div class="testi-name">Blessing O.</div><div class="testi-role">Economics — FUTO · Imo State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">As someone who runs a coaching center, I now send all my JAMBITES directly to P.Kay for their registrations and CBT prep. My pass rate has gone from 60% to 94% since partnering with them. This is real.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AP</div>
+            <div><div class="testi-name">Mr. Adewale P.</div><div class="testi-role">Coaching Center Director — Ibadan</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">Every JAMB season feels like a nightmare. P.Kay converted it into the smoothest experience of my life. The only stress I had was deciding which university to choose — and they even helped me with that.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">TW</div>
+            <div><div class="testi-name">Tolani W.</div><div class="testi-role">Medicine — UNILORIN · Kwara State</div></div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-quote-mark">"</div>
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">I am a 2026 candidate from Delta State. I contacted P.Kay online and they handled my entire process remotely. My registration slip was perfect, my mock score went from 198 to 274. I am going to UNIDEL for Mass Comm.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">JE</div>
+            <div><div class="testi-name">Judith E.</div><div class="testi-role">Mass Communication — UNIDEL · Delta State</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="testi-controls">
+      <button class="testi-btn" id="prevBtn" onclick="slideTestimonials('prev')"><i class="fas fa-chevron-left"></i></button>
+      <button class="testi-btn" id="nextBtn" onclick="slideTestimonials('next')"><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <div class="contact-glow"></div>
+      <div class="contact-grid">
+        <div>
+          <span class="section-eyebrow">Get In Touch</span>
+          <h2 class="section-title" style="max-width:400px;">Ready to Secure Your Admission?</h2>
+          <p class="section-desc">Reach out directly to our CEO or team through any of these channels. We respond fast — especially during JAMB season.</p>
+          <div class="contact-channels">
+            <a href="https://wa.me/2349020730693" target="_blank" class="channel-card">
+              <div class="channel-icon wa"><i class="fab fa-whatsapp"></i></div>
+              <div class="channel-text">
+                <strong>WhatsApp the CEO</strong>
+                <span>+234 902 073 0693 · Tap to chat now</span>
+              </div>
+              <i class="fas fa-arrow-right" style="color:var(--muted);margin-left:auto;font-size:0.8rem;"></i>
+            </a>
+            <a href="tel:+2349020730693" class="channel-card">
+              <div class="channel-icon ph"><i class="fas fa-phone"></i></div>
+              <div class="channel-text">
+                <strong>Call the CEO Directly</strong>
+                <span>09020730693 · Available 8AM–10PM Daily</span>
+              </div>
+              <i class="fas fa-arrow-right" style="color:var(--muted);margin-left:auto;font-size:0.8rem;"></i>
+            </a>
+            <a href="https://wa.me/2349020730693?text=Hello%20P.Kay%20Digital%20Enterprise%2C%20I%20need%20more%20information%20about%20your%20services." target="_blank" class="channel-card">
+              <div class="channel-icon em"><i class="fas fa-comment-dots"></i></div>
+              <div class="channel-text">
+                <strong>Send a WhatsApp Inquiry</strong>
+                <span>Tap to auto-fill your message · Instant delivery</span>
+              </div>
+              <i class="fas fa-arrow-right" style="color:var(--muted);margin-left:auto;font-size:0.8rem;"></i>
+            </a>
+          </div>
+          <p style="margin-top:1.5rem;font-size:0.8rem;color:var(--muted);">
+            <i class="fas fa-map-marker-alt" style="color:var(--cyan);margin-right:0.4rem;"></i>
+            Physical Hub: Port Harcourt, Rivers State (near RSU campus, Mile 3)
+          </p>
+        </div>
+        <div>
+          <h3 style="font-size:1rem;font-weight:700;margin-bottom:1.25rem;color:var(--white);">Send Us a Message</h3>
+          <div class="contact-form" id="contactForm">
+            <div class="form-group">
+              <label>Your Full Name</label>
+              <input type="text" id="fname" placeholder="e.g. Chidinma Okonkwo"/>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" id="fphone" placeholder="e.g. 08012345678"/>
+            </div>
+            <div class="form-group">
+              <label>Service Needed</label>
+              <select id="fservice">
+                <option value="">— Select a service —</option>
+                <option>JAMB Registration</option>
+                <option>Post-UTME Screening</option>
+                <option>CBT Practice Platform Access</option>
+                <option>Admission Counseling</option>
+                <option>Web Development (SME)</option>
+                <option>Data Correction / Profile Fix</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea id="fmessage" placeholder="Tell us what you need and we'll respond within the hour..."></textarea>
+            </div>
+            <button class="form-submit" onclick="submitForm()">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="margin-bottom:0.75rem;display:inline-flex;">
+        <div class="logo-mark">PK</div>
+        <div>
+          <div class="logo-text">P.KAY</div>
+          <div class="logo-sub">Digital Enterprise Ltd</div>
+        </div>
+      </a>
+      <p>Nigeria's premier vertically integrated EdTech and admission services corporation. KB's JAMB Services × PrintKay's Tech — together, unstoppable.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">JAMB Registration</a>
+      <a href="#services">Post-UTME Runs</a>
+      <a href="#services">CBT Platform</a>
+      <a href="#services">Admission Counseling</a>
+      <a href="#services">Web Development</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#achievements">Track Record</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact CEO</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="tel:+2349020730693">09020730693</a>
+      <a href="https://wa.me/2349020730693" target="_blank">WhatsApp Us</a>
+      <a href="#">Port Harcourt Hub</a>
+      <a href="#">Nationwide (Online)</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 P.Kay Digital Enterprise Ltd. PKDE/2026/BPLAN/001. All rights reserved.</p>
+    <div class="footer-socials">
+      <a href="https://wa.me/2349020730693" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" class="social-btn"><i class="fab fa-telegram"></i></a>
+      <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV SCROLL
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+});
+
+// MOBILE MENU
+function openMobile(){document.getElementById('mobileMenu').classList.add('open');}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');}
+
+// SCROLL TO CONTACT
+function scrollToContact(){document.getElementById('contact').scrollIntoView({behavior:'smooth'});}
+
+// REVEAL ON SCROLL
+const reveals=[...document.querySelectorAll('.reveal,.reveal-left,.reveal-right')];
+const observer=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);}});
+},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
+reveals.forEach(r=>observer.observe(r));
+
+// COUNTERS
+let countersStarted=false;
+function animateCounters(){
+  if(countersStarted)return;
+  countersStarted=true;
+  document.querySelectorAll('.counter').forEach(el=>{
+    const target=+el.dataset.target;
+    const duration=2000;
+    const step=target/(duration/16);
+    let current=0;
+    const timer=setInterval(()=>{
+      current=Math.min(current+step,target);
+      el.textContent=Math.floor(current).toLocaleString();
+      if(current>=target){clearInterval(timer);el.textContent=target.toLocaleString();}
+    },16);
+  });
+}
+const heroObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting)animateCounters();
+},{threshold:0.3});
+heroObs.observe(document.querySelector('.hero-stats'));
+
+// SERVICE CARD MOUSE EFFECT
+document.querySelectorAll('.service-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    card.style.setProperty('--mx',((e.clientX-rect.left)/rect.width*100)+'%');
+    card.style.setProperty('--my',((e.clientY-rect.top)/rect.height*100)+'%');
+  });
+});
+
+// TESTIMONIALS SLIDER
+const track=document.getElementById('testiTrack');
+const wrap=document.getElementById('testiWrap');
+let offset=0;
+const cardW=320+24;
+const totalCards=track.children.length;
+const visibleCards=()=>Math.floor(wrap.offsetWidth/(cardW));
+const maxOffset=()=>-(totalCards-visibleCards())*cardW;
+
+function slideTestimonials(dir){
+  if(dir==='next'){
+    offset=Math.max(offset-cardW*2,maxOffset());
+  } else {
+    offset=Math.min(offset+cardW*2,0);
+  }
+  track.style.transform=`translateX(${offset}px)`;
+  track.style.transition='transform 0.45s cubic-bezier(0.23,1,0.32,1)';
+}
+
+// AUTO SLIDE
+let autoSlide=setInterval(()=>slideTestimonials('next'),3500);
+wrap.addEventListener('mouseenter',()=>clearInterval(autoSlide));
+wrap.addEventListener('mouseleave',()=>{autoSlide=setInterval(()=>slideTestimonials('next'),3500);});
+
+// DRAG SCROLL
+let isDown=false,startX,scrollLeft;
+wrap.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX;scrollLeft=offset;});
+window.addEventListener('mouseup',()=>isDown=false);
+window.addEventListener('mousemove',e=>{
+  if(!isDown)return;
+  const dx=e.pageX-startX;
+  offset=Math.min(0,Math.max(scrollLeft+dx,maxOffset()));
+  track.style.transform=`translateX(${offset}px)`;
+  track.style.transition='none';
+});
+
+// FORM SUBMIT
+function submitForm(){
+  const name=document.getElementById('fname').value.trim();
+  const phone=document.getElementById('fphone').value.trim();
+  const service=document.getElementById('fservice').value;
+  const msg=document.getElementById('fmessage').value.trim();
+  if(!name||!phone){showToast('Please fill in your name and phone number.','fas fa-exclamation-circle');return;}
+  const waMsg=encodeURIComponent(`Hello P.Kay Digital Enterprise!\n\nName: ${name}\nPhone: ${phone}\nService: ${service||'General Inquiry'}\n\n${msg}`);
+  window.open(`https://wa.me/2349020730693?text=${waMsg}`,'_blank');
+  showToast('Opening WhatsApp with your message...','fas fa-check-circle');
+  document.getElementById('fname').value='';
+  document.getElementById('fphone').value='';
+  document.getElementById('fservice').value='';
+  document.getElementById('fmessage').value='';
+}
+
+function showToast(text,icon){
+  const t=document.getElementById('toast');
+  t.querySelector('.toast-text').textContent=text;
+  t.querySelector('.toast-icon').className='toast-icon '+icon;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+</script>
+</body>
+</html>
